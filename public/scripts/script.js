@@ -15,17 +15,17 @@ const generateGamesList = (gamesArray, template, parent) => {
     clone.querySelector('.text').textContent = element.description;
     clone.querySelector('.developer').textContent = element.developer;
     const catlist = clone.querySelector('.categories');
-    element.categories.forEach(category => {
-      const listItem = document.createElement('li');
-      listItem.textContent = category.name;
-      catlist.append(listItem);
-    });
+    // element.categories.forEach(category => {
+    //   const listItem = document.createElement('li');
+    //   listItem.textContent = category.name;
+    //   catlist.append(listItem);
+    // });
     const voteslist = clone.querySelector('.votes');
-    element.users.forEach(user => {
-      const listItem = document.createElement('li');
-      listItem.textContent = user.username;
-      voteslist.append(listItem);
-    });
+    // element.users.forEach(user => {
+    //   const listItem = document.createElement('li');
+    //   listItem.textContent = user.username;
+    //   voteslist.append(listItem);
+    // });
     clone.querySelector('img').src = element.image;
     clone.querySelector('a').href = element.link;
     clone.querySelector('a').textContent = element.link;
