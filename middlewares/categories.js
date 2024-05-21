@@ -34,4 +34,13 @@ const updateCategory = async(req, res, next) =>{
     }
 }
 
-module.exports = {findAllcategories, createCategory, updateCategory};
+const deleteCategory = async(req, res, next) =>{
+    try{
+       req.category = await category.findByIdAndDelete(req.params.id)
+       next();
+    } catch(err){
+        res.send(400).send({message: "Ошибка в удалении"})
+    }
+} 
+
+module.exports = {findAllcategories, createCategory, updateCategory, deleteCategory};

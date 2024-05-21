@@ -24,6 +24,14 @@ const updateUser = async(req, res, next) =>{
         res.send(400).send({message: "Ошибка в обновлении"})
     }
 }
+const deleteUser = async(req, res, next) =>{
+    try{
+       req.user = await user.findByIdAndDelete(req.params.id)
+       next();
+    } catch(err){
+        res.send(400).send({message: "Ошибка в удалении"})
+    }
+}
 
 
-module.exports = {findAllUsers, createUser, updateUser};
+module.exports = {findAllUsers, createUser, updateUser,deleteUser};
