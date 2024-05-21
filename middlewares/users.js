@@ -15,4 +15,15 @@ const createUser = async(req, res, next) =>{
         res.status(400).send("Error creating user")
     }
 }
-module.exports = {findAllUsers, createUser};
+
+const updateUser = async(req, res, next) =>{
+    try{
+       req.user = await user.findByIdAndUpdate(req.params.id, req.body)
+       next();
+    } catch(err){
+        res.send(400).send({message: "Ошибка в обновлении"})
+    }
+}
+
+
+module.exports = {findAllUsers, createUser, updateUser};

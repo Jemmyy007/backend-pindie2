@@ -16,4 +16,22 @@ const createCategory = async(req, res, next) =>{
     }
 }
 
-module.exports = {findAllcategories, createCategory};
+// const findCategoryById = async(req, res, next) =>{
+//     try{
+//         req.category = await category.findById(req.params.id)
+//         next();
+//     } catch(err){
+//         res.send(404).send({message: "Игра не найдена"})
+//     }
+// }
+
+const updateCategory = async(req, res, next) =>{
+    try{
+       req.category = await category.findByIdAndUpdate(req.params.id, req.body)
+       next();
+    } catch(err){
+        res.send(400).send({message: "Ошибка в обновлении"})
+    }
+}
+
+module.exports = {findAllcategories, createCategory, updateCategory};
