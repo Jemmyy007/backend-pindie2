@@ -5,6 +5,28 @@ const findAllcategories = async(req, res, next) =>{
     next();
 }
 
+const checkEmptyName = async (req, res, next) => {
+    if (!req.body.name) {
+      res.setHeader("Content-Type", "application/json");
+          res.status(400).send(JSON.stringify({ message: "Введите название категории" }));
+    } else {
+      next();
+    }
+  }; 
+
+const checkIsCategoryExists = async (req, res, next) => {
+    const isInArray = req.categoriesArray.find((category) => {
+      return req.body.name === category.name;
+    });
+    // Если нашли совпадение, то отвечаем кодом 400 и сообщением
+    if (isInArray) {
+      res.setHeader("Content-Type", "application/json");
+          res.status(400).send(JSON.stringify({ message: "Категория с таким названием уже существует" }));
+    } else {
+      next();
+    }
+  }; 
+
 const createCategory = async(req, res, next) =>{
     console.log("POST /categories");
     try {
@@ -16,14 +38,6 @@ const createCategory = async(req, res, next) =>{
     }
 }
 
-// const findCategoryById = async(req, res, next) =>{
-//     try{
-//         req.category = await category.findById(req.params.id)
-//         next();
-//     } catch(err){
-//         res.send(404).send({message: "Игра не найдена"})
-//     }
-// }
 
 const updateCategory = async(req, res, next) =>{
     try{
@@ -43,4 +57,13 @@ const deleteCategory = async(req, res, next) =>{
     }
 } 
 
-module.exports = {findAllcategories, createCategory, updateCategory, deleteCategory};
+const checkIfCategoriesAvaliable = async (req, res, next) => {
+  if (!req.body.categories || req.body.categories.length === 0) {
+    res.setHeader("Content-Type", "application/json");
+        res.status(400).send(JSON.stringify({ message: "Выберите хотя бы одну категорию" }));
+  } else {
+    next();
+  }
+};
+
+module.exports = {findAllcategories, createCategory, updateCategory, deleteCategory, checkIsCategoryExists, checkEmptyName, checkIfCategoriesAvaliable};
