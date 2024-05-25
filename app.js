@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const connectToDatabase = require("./database/connect")
-const cors = require("./middlewares/cors");
+const { cors } = require("./middlewares/cors")
 const apiRouter = require("./routes/apiRouter");
 const cookieParser = require("cookie-parser");
 const pagesRouter = require("./routes/pages");
@@ -13,7 +13,7 @@ connectToDatabase()
 const port = 3001;
 
 app.use(
-    // cors,
+    cors,
     cookieParser(),
     bodyParser.json(),
     pagesRouter, 
