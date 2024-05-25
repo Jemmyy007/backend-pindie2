@@ -25,15 +25,34 @@ const gameSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    categories: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: categoryModel
-    }],
-    users: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: userModel
-    }]
+    users: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: userModel 
+        }
+      ],
+      categories: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: categoryModel 
+        }
+      ]
 })
+
+gameSchema.statics.findGameByCategory = function(category) {
+    return this.find({}) 
+      .populate({
+        path: "categories",
+        match: { name: category } 
+      })
+      .populate({
+        path: "users",
+        select: "-password"
+      })
+      .then(games => {
+        return games.filter(game => game.categories.length > 0);
+      });
+  }; 
 
 const game = mongoose.model("games", gameSchema)
 module.exports = game;
