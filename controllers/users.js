@@ -32,4 +32,9 @@ const sendUserCreated = (req, res) =>{
      });
  }; 
 
-module.exports = {sendAllUsers, sendUserCreated, sendUserUpdated, sendUserDeleted, login }
+ const sendMe = (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(req.user));
+}; 
+
+module.exports = {sendAllUsers, sendUserCreated, sendUserUpdated, sendUserDeleted, login, sendMe }
