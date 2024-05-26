@@ -18,6 +18,7 @@ gamesRouter.post(
   
   gamesRouter.put(
     "/games/:id",
+    findGameById,
     checkIfUsersAreSafe,
     checkIfCategoriesAvaliable,
     checkEmptyFields,
