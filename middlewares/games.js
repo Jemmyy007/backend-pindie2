@@ -126,4 +126,13 @@ const checkIsVoteRequest = async (req, res, next) => {
   next();
 }; 
 
-module.exports = {findAllGames, createGame, updateGame, deleteGame, checkEmptyFields, checkIfCategoriesAvaliable, checkIfUsersAreSafe, checkIsGameExists, checkIsVoteRequest};
+const findGameById = async (req, res, next) => {
+  try {
+      req.game = await games.findById(req.params.id);
+  next();
+  } catch (error) {
+      res.status(404).send({ message: "Game not found" });
+  }
+}; 
+
+module.exports = {findAllGames, createGame, updateGame, deleteGame, checkEmptyFields, checkIfCategoriesAvaliable, checkIfUsersAreSafe, checkIsGameExists, checkIsVoteRequest, findGameById};
