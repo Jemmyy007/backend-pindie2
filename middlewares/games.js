@@ -79,6 +79,10 @@ const checkEmptyFields = async (req, res, next) => {
   // Файл middlewares/games.js
 
 const checkIfCategoriesAvaliable = async (req, res, next) => {
+  if(req.isVoteRequest) {
+    next();
+    return;
+  } 
   if (!req.body.categories || req.body.categories.length === 0) {
     res.setHeader("Content-Type", "application/json");
         res.status(400).send(JSON.stringify({ message: "Выбери хотя бы одну категорию" }));
