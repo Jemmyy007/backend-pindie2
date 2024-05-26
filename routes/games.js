@@ -23,8 +23,8 @@ gamesRouter.post(
     checkIfCategoriesAvaliable,
     checkEmptyFields,
     checkAuth,
-    updateGame,
     checkIsVoteRequest,
+    updateGame,
     sendGameUpdated
   ); 
 
