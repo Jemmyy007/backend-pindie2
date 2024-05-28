@@ -76,8 +76,6 @@ const checkEmptyFields = async (req, res, next) => {
   };
 
 
-  // Файл middlewares/games.js
-
 const checkIfCategoriesAvaliable = async (req, res, next) => {
   if(req.isVoteRequest) {
     next();
@@ -85,23 +83,19 @@ const checkIfCategoriesAvaliable = async (req, res, next) => {
   } 
   if (!req.body.categories || req.body.categories.length === 0) {
     res.setHeader("Content-Type", "application/json");
-        res.status(400).send(JSON.stringify({ message: "Выбери хотя бы одну категорию" }));
+        res.status(400).send(JSON.stringify({ message: "Выбери хотя бы одну категорию. Ошибка тут" }));
   } else {
     next();
   }
 };
 
-// Файл middlewares/games.js
+
 
 const checkIfUsersAreSafe = async (req, res, next) => {
-    // Проверим, есть ли users в теле запроса
   if (!req.body.users) {
     next();
     return;
   }
-  // Cверим, на сколько изменился массив пользователей в запросе
-  // с актуальным значением пользователей в объекте game
-  // Если больше чем на единицу, вернём статус ошибки 400 с сообщением
   if (req.body.users.length - 1 === req.game.users.length) {
     next();
     return;
