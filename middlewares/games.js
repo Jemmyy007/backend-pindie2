@@ -57,6 +57,7 @@ const deleteGame = async(req, res, next) =>{
 }
 
 const checkEmptyFields = async (req, res, next) => {
+  
   if(req.isVoteRequest) {
     next();
     return;
@@ -77,7 +78,6 @@ const checkEmptyFields = async (req, res, next) => {
 
 
 const checkIfCategoriesAvaliable = async (req, res, next) => {
-  console.log(req.body)
   if(req.isVoteRequest) {
     next();
     return;
@@ -127,7 +127,9 @@ const checkIsVoteRequest = async (req, res, next) => {
 
 const findGameById = async (req, res, next) => {
   try {
-      req.game = await game.findById(req.params.id);
+      req.game = await game.findById(req.params.id)
+      .populate("categories")
+      .populate("users")
   next();
   } catch (error) {
       res.status(404).send({ message: "Game not found" });
