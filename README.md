@@ -1,4 +1,4 @@
-Ссылка на репозиторий с фронтендом: (https://github.com/Jemmyy007/backend-pindie2/tree/last-review)  
+Ссылка на репозиторий с фронтендом: (https://github.com/Jemmyy007/frontend-pindie2/pull/1)  
 Пулл реквест
 
 Ссылка на домен фронтенда: (https://games4swag.nomoredomainswork.ru)
